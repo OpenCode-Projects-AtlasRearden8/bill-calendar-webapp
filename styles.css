@@ -1,0 +1,253 @@
+:root {
+  --ink: #1f2430;
+  --muted: #6b7280;
+  --line: #d7dbe0;
+  --accent: #2f6f4f;
+  --accent-soft: #e7f2ec;
+  --warn: #b45309;
+  --warn-soft: #fdf1dd;
+  --today: #2952a3;
+  --today-soft: #e3ecfb;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  color: var(--ink);
+  background: #f7f8fa;
+}
+
+.page {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 16px 20px 48px;
+}
+
+a { color: var(--accent); }
+
+header.topbar h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+header.topbar p {
+  margin: 2px 0 12px;
+  color: var(--muted);
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.controls button,
+.controls input[type="file"],
+.controls select {
+  font: inherit;
+  font-family: inherit;
+  padding: 6px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.controls input[type="file"] { background: #fff; }
+.controls button:hover { border-color: var(--accent); }
+.controls label { color: var(--muted); font-size: 0.9rem; }
+
+#drop {
+  border: 1px dashed var(--line);
+  border-radius: 8px;
+  padding: 6px 12px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+#drop.over { border-color: var(--accent); color: var(--accent); }
+
+.card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 16px 18px;
+  margin-bottom: 16px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.month-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.month-head h2 { margin: 0; font-size: 1.25rem; }
+.month-head .total { color: var(--accent); font-weight: bold; }
+.hint { color: var(--muted); font-size: 0.9rem; margin: 0; }
+
+.week-list { margin: 4px 0 0; }
+.week-item { display: inline-block; margin: 2px 14px 2px 0; }
+.week-item strong { color: var(--warn); }
+.tag { color: var(--muted); margin-left: 6px; font-size: 0.85rem; }
+.week-empty { margin: 0; color: var(--muted); }
+
+#calendar {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.cal-row { display: contents; }
+
+.cal-head {
+  display: block;
+}
+
+.cal-head .cal-dow {
+  text-align: center;
+  font-weight: bold;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  padding: 6px 0;
+  background: var(--accent-soft);
+  border-bottom: 1px solid var(--line);
+}
+
+.cal-day {
+  min-height: 84px;
+  border: 0.5px solid var(--line);
+  padding: 4px 6px;
+  position: relative;
+  background: #fff;
+}
+
+.cal-day.out { background: #f1f2f4; }
+.cal-day.out .cal-num { color: #b6bcc3; }
+
+.cal-day.this-week:not(.out) {
+  background: var(--warn-soft);
+}
+
+.cal-day.today {
+  box-shadow: inset 0 0 0 2px var(--today);
+}
+
+.cal-num {
+  font-size: 0.8rem;
+  color: var(--muted);
+  display: block;
+  line-height: 1.1;
+}
+
+.bill {
+  display: block;
+  font-size: 0.78rem;
+  line-height: 1.35;
+  margin-top: 2px;
+  padding: 1px 4px;
+  border-left: 3px solid var(--warn);
+  border-radius: 3px;
+  background: #fff9f3;
+  overflow: hidden;
+}
+
+.bill.auto {
+  border-left-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.bill-name { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.bill-amt { font-weight: bold; }
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin: 10px 0 0;
+}
+
+.legend .key {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  margin-right: 5px;
+  vertical-align: -1px;
+}
+
+footer.pagefoot {
+  color: var(--muted);
+  font-size: 0.85rem;
+  text-align: center;
+  margin-top: 24px;
+}
+
+.print-head { display: none; }
+.print-this-week { display: none; }
+
+@media print {
+  @page {
+    size: letter landscape;
+    margin: 0.35in;
+  }
+
+  body { background: #fff; }
+  .controls, .no-print, header.topbar, footer.pagefoot { display: none; }
+  .card {
+    border: none;
+    box-shadow: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .print-head {
+    display: block;
+    text-align: center;
+    margin-bottom: 6px;
+  }
+
+  .print-head h1 {
+    margin: 0 0 2px;
+    font-size: 20pt;
+  }
+
+  .print-sub {
+    font-size: 10pt;
+    color: #333;
+    margin: 0 0 4px;
+  }
+
+  .print-this-week {
+    display: block;
+    text-align: center;
+    font-size: 10pt;
+    margin: 0 0 6px;
+  }
+
+  .print-this-week:empty { display: none; }
+  .print-this-week .week-item { margin: 0 10px 0 0; }
+  #month-label, #month-total { display: none; }
+  .month-head h2 { display: none; }
+
+  #calendar { border: 1.5px solid #1f2430; border-radius: 0; }
+  .cal-day { min-height: 72px; page-break-inside: avoid; }
+  .cal-day.today { box-shadow: inset 0 0 0 1.5pt var(--today); }
+  .bill { font-size: 7.5pt; }
+
+  .print-foot {
+    text-align: center;
+    font-size: 8pt;
+    color: #555;
+    margin-top: 6px;
+  }
+}

@@ -1,0 +1,9 @@
+name,amount,dueDay,autopay
+Rent,1600,1,yes
+Car Insurance,129.61,7,no
+Streaming,11.99,12,autopay
+Electricity,142.37,15,no
+Internet,79.99,20,yes
+Phone,55.00,24,no
+Credit Card,220,26,no
+Water/Trash,46.80,30,no

@@ -1,0 +1,10 @@
+{
+  "name": "bill-calendar-webapp",
+  "version": "1.0.0",
+  "description": "Local static month-view bill calendar that reads a CSV and prints a one-page money calendar.",
+  "private": true,
+  "scripts": {
+    "test": "node tests.cjs"
+  },
+  "license": "MIT"
+}

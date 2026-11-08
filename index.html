@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bill Calendar — one page for the fridge</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="page">
+  <header class="topbar">
+    <h1>Bill Calendar</h1>
+    <p>Load a simple CSV, see the month, print a one-page money calendar for the fridge. Works offline — no accounts, no network.</p>
+  </header>
+
+  <div class="controls no-print">
+    <button id="btn-prev" type="button" aria-label="Previous month">&larr; Prev</button>
+    <button id="btn-today" type="button">Today</button>
+    <button id="btn-next" type="button" aria-label="Next month">Next &rarr;</button>
+    <span id="month-label"></span>
+    <label for="csv-file">CSV:</label>
+    <input type="file" id="csv-file" accept=".csv,text/csv">
+    <button id="btn-sample" type="button">Load sample</button>
+    <button id="btn-print" type="button">Print</button>
+    <div id="drop">…or drop a .csv anywhere on this box</div>
+  </div>
+  <p class="hint no-print">CSV columns, in order: <code>name, amount, dueDay, autopay</code> — e.g. <code>Electricity,"142.37",15,no</code>. Amounts may include <code>$</code> and commas; autopay accepts <code>yes/no/true/false/y/n/1/0/x/on/autopay</code>.</p>
+
+  <section class="card print-area">
+    <div class="print-head">
+      <h1 id="print-title">Money Calendar</h1>
+      <p class="print-sub"><span id="print-total"></span> — <span id="print-source"></span></p>
+      <div class="print-this-week" id="print-this-week"></div>
+    </div>
+
+    <div class="month-head">
+      <h2 id="month-label"></h2>
+      <span class="total" id="month-total"></span>
+      <span id="bill-count" class="hint no-print"></span>
+    </div>
+
+    <div class="no-print" id="this-week-wrap">
+      <h3 style="margin-bottom:2px">Due by hand this week</h3>
+      <div class="week-list" id="this-week"></div>
+    </div>
+
+    <div id="calendar" role="grid" aria-label="Month view of bills"></div>
+
+    <div class="legend no-print">
+      <span><span class="key" style="background:var(--warn-soft)"></span>due this week</span>
+      <span><span class="key" style="background:var(--accent-soft)"></span>autopay (✔)</span>
+      <span><span class="key" style="background:var(--today-soft);box-shadow:inset 0 0 0 2px var(--today)"></span>today</span>
+      <span>Because this page is static, open the file directly or serve it offline — nothing leaves your computer.</span>
+    </div>
+  </section>
+
+  <footer class="pagefoot no-print">
+    Bill Calendar · a local-first money calendar · <a href="tests.html">run the tests</a>
+  </footer>
+</div>
+
+<script src="app.js"></script>
+<script src="ui.js"></script>
+</body>
+</html>

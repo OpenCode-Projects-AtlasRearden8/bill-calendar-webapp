@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bill Calendar — Tests</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  .pass { color: #2f6f4f; font-weight: bold; }
+  .fail { color: #b03030; font-weight: bold; }
+  pre { white-space: pre-wrap; }
+  table { border-collapse: collapse; width: 100%; }
+  td, th { border: 1px solid #d7dbe0; padding: 4px 8px; text-align: left; font-size: 0.9rem; }
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="topbar">
+    <h1>Bill Calendar — Tests</h1>
+    <p>Static test page for the calendar engine. No network needed; just open this file.</p>
+  </header>
+  <section class="card">
+    <p id="summary">Running…</p>
+    <table id="results"><thead><tr><th>Test</th><th>Result</th><th>Detail</th></tr></thead><tbody></tbody></table>
+    <p class="hint">Also runnable from the terminal: <code>node tests.cjs</code></p>
+  </section>
+  <footer class="pagefoot"><a href="index.html">&larr; back to the calendar</a></footer>
+</div>
+<script src="app.js"></script>
+<script src="tests.js"></script>
+<script src="test-runner.js"></script>
+<script>
+(function () {
+  const out = runBillSuite(window.BillTests);
+  const tbody = document.querySelector("#results tbody");
+  out.results.forEach(function (r) {
+    const tr = document.createElement("tr");
+    const td1 = document.createElement("td"); td1.textContent = r.name;
+    const td2 = document.createElement("td"); td2.textContent = r.pass ? "PASS" : "FAIL";
+    td2.className = r.pass ? "pass" : "fail";
+    const td3 = document.createElement("td"); td3.textContent = r.error || "";
+    tr.appendChild(td1); tr.appendChild(td2); tr.appendChild(td3);
+    tbody.appendChild(tr);
+  });
+  const s = document.getElementById("summary");
+  s.textContent = out.failures === 0
+    ? "All " + out.total + " tests passed."
+    : out.failures + " of " + out.total + " tests FAILED — details below.";
+  s.style.color = out.failures === 0 ? "#2f6f4f" : "#b03030";
+  document.title = (out.failures === 0 ? "PASS" : "FAIL") + " — Bill Calendar Tests";
+})();
+</script>
+</body>
+</html>
